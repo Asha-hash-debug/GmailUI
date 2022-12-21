@@ -87,19 +87,16 @@ def hello_world():
             else:
                 userId ='pod8ecms@gmail.com'
 
-            # current_time = datetime.datetime.now()
-            # ten_minutes_ago = current_time - datetime.timedelta(minutes=880)
-            # isodate = datetime.datetime.isoformat(ten_minutes_ago)
-            # print(isodate)
-            todaydate = time.strftime('%Y%m%d')
-            print(todaydate)
+            current_time = datetime.datetime.now()  # use datetime.datetime.utcnow() for UTC time
+            ten_minutes_ago = current_time - datetime.timedelta(minutes=5)
+            ten_minutes_ago_epoch_ts = int(ten_minutes_ago.timestamp())  # in
+
             result = service.users().messages().list(userId=userId, labelIds=["INBOX"],
-                                                     maxResults=2,q=f'from:<noreply@meraki.com> after:{todaydate}').execute()
+                                                     maxResults=2,q=f'from:<noreply@meraki.com> after:{ten_minutes_ago_epoch_ts}').execute()
             print(result)
             # We can also pass maxResults to get any number of emails. Like this:
             # result = service.users().messages().list(maxResults=200, userId='me').execute()
             messages = result.get('messages')
-
 
             # messages is a list of dictionaries where each dictionary contains a message id.
             if messages == None:
@@ -130,7 +127,6 @@ def hello_world():
                             pass
                     temp_dict['Snippet'] = message['snippet']  # fetching message snippet
 
-
                     try:
 
                         # Fetching message body
@@ -151,8 +147,8 @@ def hello_world():
                     except:
                         pass
 
-                    if temp_dict['Subject'] != "Your Cisco Meraki Dashboard security code" and result['resultSizeEstimate']==1:
-                        otplist.update({f'{mail[0:-11]}@gmail.com': None})
+                    # if temp_dict['Subject'] != "Your Cisco Meraki Dashboard security code" and result['resultSizeEstimate']==1:
+                    #     otplist.update({f'{mail[0:-11]}@gmail.com': None})
 
                     if temp_dict['Subject'] == "Your Cisco Meraki Dashboard security code":
                         msgcount+=1
@@ -171,4 +167,4 @@ def hello_world():
     return render_template('index.html', result=otplist)
 
 if __name__=='__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0",port=5000)
