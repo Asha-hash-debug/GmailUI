@@ -18,7 +18,7 @@ app = Flask(__name__)
 @app.route("/")
 def hello_world():
     list = ["Pod1ecms_token.json","Pod2ecms_token.json","Pod3ecms_token.json","Pod4ecms_token.json",
-             "Pod5ecms_token.json","Pod6ecms_token.json","Pod7ecms_token.json","Pod8ecms_token.json"]
+             "Pod5ecms_token.json","Pod6ecms_token.json","ecmspod7_token.json","Pod8ecms_token.json"]
     otplist = {}
 
     # If modifying these scopes, delete the file token.json.
@@ -53,7 +53,7 @@ def hello_world():
                     credfile="Pod5ecms.json"
                 elif mail=="Pod6ecms_token.json":
                     credfile="Pod6ecms.json"
-                elif mail=="Pod7ecms_token.json":
+                elif mail=="ecmspod7_token.json":
                     credfile="Pod7ecms.json"
                 else:
                     credfile="Pod8ecms.json"
@@ -82,7 +82,7 @@ def hello_world():
                 userId = 'pod5ecms@gmail.com'
             elif mail == "Pod6ecms_token.json":
                 userId = 'pod6ecms@gmail.com'
-            elif mail == "Pod7ecms_token.json":
+            elif mail == "ecmspod7_token.json":
                 userId = 'ecmspod7@gmail.com'
             else:
                 userId ='pod8ecms@gmail.com'
