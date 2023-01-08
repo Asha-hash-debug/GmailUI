@@ -11,8 +11,8 @@
     <title>ECMS GMAIL OTP's!</title>
   </head>
   <body>
-    <h2 style="text-align:center;">ECMS Dashboard OTP's</h2>
-    <div class="container">
+    <h2 style="padding-top:30px;text-align:center;">{{header}}</h2>
+    <div class="container">`
       <table class="table table-striped" style="text-align:center;">
       <thead>
         <tr>
@@ -22,7 +22,7 @@
         </tr>
       </thead>
       <tbody>
-      {% for key, value in result.items() %}
+      {% for key, value in result.items()%}
        <tr>
             <th scope="row">{{loop.index}}</th>
             <td> {{ key }} </td>
